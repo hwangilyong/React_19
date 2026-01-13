@@ -1,0 +1,82 @@
+@layer components {
+	.content {
+		padding: 16px 24px 0;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.notice {
+		display: flex;
+		gap: 4px;
+		font-size: 14px;
+		line-height: 22px;
+		color: #0076ff;
+	}
+
+	.notice strong {
+		font-weight: 600;
+	}
+
+	.noticeBullet {
+		font-weight: 500;
+	}
+
+	.table {
+		width: 684px;
+		border: 1px solid #d5d5d5;
+		border-radius: 4px;
+		overflow: hidden;
+		margin-top: 12px;
+	}
+
+	.tableHeader {
+		background: #fafbff;
+	}
+
+	.tableBody {
+		background: #ffffff;
+	}
+
+	.table table {
+		table-layout: fixed;
+	}
+
+	.table thead tr,
+	.table tbody tr {
+		height: 44px;
+	}
+
+	.table th,
+	.table td {
+		border-color: #d5d5d5;
+	}
+
+	.noCell {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #242628;
+		font-weight: 500;
+	}
+
+	.noCellPlaceholder {
+		background: #e8ebf1;
+		color: #758292;
+	}
+
+	.actions {
+		display: flex;
+		justify-content: flex-end;
+		gap: 8px;
+	}
+
+	.actionButton {
+		min-width: 72px;
+		min-height: 40px;
+		background-color: #f1f4f9 !important;
+		border-color: #d5d5d5 !important;
+		color: #242628 !important;
+	}
+}

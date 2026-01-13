@@ -1,0 +1,21 @@
+declare const classNames: {
+  readonly page: "page";
+  readonly shell: "shell";
+  readonly leftPanel: "leftPanel";
+  readonly brandTop: "brandTop";
+  readonly brandLogo: "brandLogo";
+  readonly leftContent: "leftContent";
+  readonly badge: "badge";
+  readonly badgeLogo: "badgeLogo";
+  readonly leftText: "leftText";
+  readonly leftTitle: "leftTitle";
+  readonly leftSubtitle: "leftSubtitle";
+  readonly rightPanel: "rightPanel";
+  readonly form: "form";
+  readonly title: "title";
+  readonly inputGroup: "inputGroup";
+  readonly divider: "divider";
+  readonly button: "button";
+  readonly copy: "copy";
+};
+export = classNames;

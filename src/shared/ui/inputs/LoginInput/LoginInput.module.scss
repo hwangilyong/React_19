@@ -1,0 +1,72 @@
+@layer components {
+	.inputWrapper {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		height: 52px;
+		padding: 0 16px;
+		border-radius: 8px;
+		border: 1px solid rgba(25, 25, 23, 0.2);
+		background: #ffffff;
+		transition: border-color 0.2s ease, background-color 0.2s ease;
+	}
+
+	.left {
+		display: flex;
+		align-items: center;
+	}
+
+	.icon {
+		width: 24px;
+		height: 24px;
+		object-fit: contain;
+	}
+
+	.input {
+		flex: 1;
+		border: none;
+		outline: none;
+		background: transparent;
+		font-size: 16px;
+		font-weight: 500;
+		color: #242628;
+		letter-spacing: -0.16px;
+
+		&::placeholder {
+			color: #767676;
+		}
+	}
+
+	.right {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 20px;
+		height: 20px;
+		padding: 0;
+		border: none;
+		background: transparent;
+		cursor: pointer;
+	}
+
+	.rightIcon {
+		width: 20px;
+		height: 20px;
+		object-fit: contain;
+	}
+
+	.isFocused {
+		border: 2px solid #242628;
+		background: #f4f7ff;
+	}
+
+	.isFilled {
+		border: 2px solid #242628;
+		background: #ffffff;
+	}
+
+	.isError {
+		border: 2px solid #f01a1a;
+		background: #ffffff;
+	}
+}

@@ -1,0 +1,54 @@
+#wrap, #root, body {
+  width:100%; height:100%;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --mws-white: #ffffff;
+  --mws-black: #000000;
+  --mws-gray-50: #f8f8fa;
+  --mws-gray-60: #f8f8f8;
+  --mws-gray-75: #f1f1f5;
+  --mws-gray-100: #eef0f8;
+  --mws-gray-150: #f1f4f9;
+  --mws-gray-200: #e8ebf1;
+  --mws-gray-250: #e5e5ec;
+  --mws-gray-300: #d6d6d6;
+  --mws-gray-325: #dfdfdf;
+  --mws-gray-350: #d5d5d5;
+  --mws-gray-400: #dde3ec;
+  --mws-gray-450: #b5bdca;
+  --mws-gray-475: #c1bdbd;
+  --mws-gray-500: #9095ac;
+  --mws-gray-550: #94949a;
+  --mws-gray-600: #797a7c;
+  --mws-gray-650: #758292;
+  --mws-ink-500: #111111;
+  --mws-ink-600: #222222;
+  --mws-ink-650: #212121;
+  --mws-ink-700: #444e5d;
+  --mws-ink-800: #323d4e;
+  --mws-ink-900: #242628;
+  --mws-blue-700: #005dff;
+  --mws-blue-600: #0076ff;
+  --mws-blue-550: #4379ee;
+  --mws-blue-500: #4880ff;
+  --mws-blue-400: #49aeff;
+  --mws-blue-100: #d9eaff;
+  --mws-red-500: #f01a1a;
+  --mws-alpha-blue-15: rgba(72, 128, 255, 0.15);
+  --mws-alpha-blue-50: rgba(72, 128, 255, 0.5);
+  --mws-alpha-primary-10: rgba(0, 118, 255, 0.1);
+  --mws-alpha-primary-15: rgba(0, 118, 255, 0.15);
+  --mws-alpha-primary-20: rgba(0, 118, 255, 0.2);
+  --mws-alpha-primary-25: rgba(0, 118, 255, 0.25);
+  --mws-alpha-red-10: rgba(240, 26, 26, 0.1);
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+  letter-spacing: -0.01em;
+}

@@ -1,0 +1,27 @@
+declare const classNames: {
+  readonly tableWrapper: "tableWrapper";
+  readonly table: "table";
+  readonly headerTable: "headerTable";
+  readonly headerScroll: "headerScroll";
+  readonly bodyTable: "bodyTable";
+  readonly thead: "thead";
+  readonly headerRow: "headerRow";
+  readonly headerCell: "headerCell";
+  readonly tbody: "tbody";
+  readonly row: "row";
+  readonly rowClickable: "rowClickable";
+  readonly cell: "cell";
+  readonly cellSelected: "cellSelected";
+  readonly cellInRange: "cellInRange";
+  readonly cellChanged: "cellChanged";
+  readonly cellInput: "cellInput";
+  readonly rowPressed: "rowPressed";
+  readonly emptyRow: "emptyRow";
+  readonly emptyCell: "emptyCell";
+  readonly emptyContent: "emptyContent";
+  readonly emptyIcon: "emptyIcon";
+  readonly emptyText: "emptyText";
+  readonly fillerRow: "fillerRow";
+  readonly fillerCell: "fillerCell";
+};
+export = classNames;

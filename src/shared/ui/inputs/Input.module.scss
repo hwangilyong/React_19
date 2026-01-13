@@ -1,0 +1,77 @@
+@layer components {
+  .inputWrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 2px;
+    border: 1px solid var(--mws-gray-350);
+    background-color: var(--mws-white);
+    color: var(--mws-ink-900);
+    font-size: 14px;
+    font-weight: 500;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--mws-alpha-blue-15);
+    }
+
+    &:focus-within {
+      border-color: var(--mws-blue-600);
+      background-color: var(--mws-alpha-blue-15);
+    }
+
+    &:has(input:disabled) {
+      background-color: var(--mws-gray-200);
+      border-color: var(--mws-gray-350);
+      color: var(--mws-gray-650);
+    }
+  }
+
+  .input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font-size: 14px;
+    font-weight: 500;
+
+    &::placeholder {
+      color: var(--mws-gray-550);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      color: inherit;
+    }
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+
+  .rightSlot {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .unit {
+    color: inherit;
+    font-size: 14px;
+  }
+
+  .hasLeft {
+    padding-left: 0;
+  }
+
+  .hasRight {
+    padding-right: 0;
+  }
+}

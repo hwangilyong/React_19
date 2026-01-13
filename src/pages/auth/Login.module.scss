@@ -1,0 +1,181 @@
+@layer components {
+	.page {
+		min-height: 100vh;
+		background: #2b2c2e;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 10px;
+	}
+
+	.shell {
+		display: flex;
+		gap: 20px;
+		width: min(1886px, 100%);
+		height: min(1060px, 100%);
+	}
+
+	.leftPanel {
+		position: relative;
+		width: 945px;
+		height: 1060px;
+		border-radius: 30px;
+		overflow: hidden;
+		background-size: cover;
+		background-position: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 50px;
+	}
+
+	.brandTop {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.brandLogo {
+		width: 115px;
+		height: 20px;
+		object-fit: contain;
+	}
+
+	.leftContent {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 36px;
+		margin-bottom: 120px;
+	}
+
+	.badge {
+		width: 148px;
+		height: 148px;
+		border-radius: 32px;
+		background: #ffffff;
+		border: 1px solid rgba(25, 25, 23, 0.2);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+	}
+
+	.badgeLogo {
+		width: 68px;
+		height: 80px;
+		object-fit: contain;
+	}
+
+	.leftText {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		text-align: center;
+		color: #ffffff;
+	}
+
+	.leftTitle {
+		font-size: 32px;
+		font-weight: 600;
+		letter-spacing: -0.32px;
+	}
+
+	.leftSubtitle {
+		font-size: 24px;
+		font-weight: 500;
+		letter-spacing: -0.24px;
+	}
+
+	.rightPanel {
+		position: relative;
+		width: 945px;
+		height: 1060px;
+		border-radius: 30px;
+		background: #ffffff;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.form {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+		align-items: center;
+	}
+
+	.title {
+		font-size: 34px;
+		font-weight: 600;
+		letter-spacing: -0.34px;
+		color: #242628;
+		margin-bottom: 10px;
+	}
+
+	.inputGroup {
+		width: 360px;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.divider {
+		height: 1px;
+		width: 360px;
+		background: rgba(25, 25, 23, 0.2);
+	}
+
+	.button {
+		width: 360px;
+		height: 52px;
+		border-radius: 8px;
+		background: #242628;
+		color: #ffffff;
+		font-size: 16px;
+		font-weight: 500;
+		letter-spacing: -0.16px;
+		border: none;
+		cursor: pointer;
+	}
+
+	.copy {
+		position: absolute;
+		bottom: 117px;
+		font-size: 14px;
+		color: #65686e;
+	}
+
+	@media (max-width: 1440px) {
+		.shell {
+			flex-direction: column;
+			align-items: center;
+			height: auto;
+		}
+
+		.leftPanel,
+		.rightPanel {
+			width: 100%;
+			max-width: 945px;
+			height: auto;
+		}
+
+		.leftPanel {
+			padding: 32px;
+		}
+
+		.leftContent {
+			margin-bottom: 40px;
+		}
+
+		.rightPanel {
+			padding: 80px 24px;
+		}
+
+		.copy {
+			position: static;
+			margin-top: 48px;
+		}
+	}
+}

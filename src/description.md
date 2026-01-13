@@ -1,0 +1,21 @@
+## Folder guide
+
+- app
+  - 앱 진입점과 전역 설정이 위치합니다.
+  - 전역 라우터, 스토어, 글로벌 스타일, 지도 초기화, 전역 Provider(Toast, ModalRoot 등)
+- process
+  - 더 이상 사용하지 않습니다.
+- pages
+  - URL 진입 시 렌더링되는 페이지 단위입니다.
+- widgets
+  - features와 entities를 조합한 UI 블록입니다.
+  - 예: 인스타그램 포스터
+- features
+  - 하나의 기능 단위 로직과 UI가 모이는 영역입니다.
+  - CRUD 중 CUD에 해당하는 상호작용(예: 삭제 버튼)
+- entities
+  - 도메인 단위의 최소 모델/데이터 표현입니다.
+  - CRUD 중 R에 해당하는 정보 표시(예: 게시글)
+- shared
+  - 비즈니스 로직과 무관한 재사용 구성요소 및 유틸입니다.
+  - 예: shadcn/ui, axios 설정, 문자열 유틸 등

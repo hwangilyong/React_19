@@ -1,0 +1,171 @@
+@layer components {
+	.tableWrapper {
+		width: 100%;
+		border: 1px solid var(--mws-gray-350);
+		border-radius: 4px;
+		background-color: var(--mws-white);
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.table {
+		width: 100%;
+		border-collapse: collapse;
+		table-layout: fixed;
+	}
+
+	.headerTable {
+		flex: 0 0 auto;
+	}
+
+	.headerScroll {
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.bodyScroll {
+	}
+
+	.bodyTable {
+		width: 100%;
+	}
+
+	.thead {
+		background-color: #fafbff;
+	}
+
+	.headerRow {
+		height: 48px;
+	}
+
+	.headerCell {
+		padding: 0 16px;
+		text-align: left;
+		font-size: 14px;
+		font-weight: 600;
+		color: var(--mws-ink-900);
+		border-bottom: 1px solid var(--mws-gray-350);
+		border-right: 1px solid var(--mws-gray-350);
+
+		&:last-child {
+			border-right: none;
+		}
+	}
+
+	.tbody {
+		background-color: var(--mws-white);
+	}
+
+	.row {
+		height: 48px;
+		border-bottom: 1px solid var(--mws-gray-350);
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: rgba(72, 128, 255, 0.062);
+		}
+
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+
+	.rowClickable {
+		cursor: pointer;
+	}
+
+	.cell {
+		padding: 0 16px;
+		font-size: 14px;
+		font-weight: 400;
+		color: var(--mws-ink-900);
+		border-right: 1px solid var(--mws-gray-350);
+		vertical-align: middle;
+		user-select: none;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+
+		&:last-child {
+			border-right: none;
+		}
+
+		&:focus,
+		&:focus-visible {
+			outline: 1px solid var(--mws-blue-600);
+			outline-offset: -1px;
+		}
+	}
+
+	.cellSelected {
+		background-color: rgba(72, 128, 255, 0.18);
+	}
+
+	.cellInRange {
+		background-color: rgba(72, 128, 255, 0.08);
+	}
+
+	.cellChanged {
+		background-color: rgba(255, 221, 128, 0.45);
+	}
+
+	.cellInput {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		font-size: 14px;
+		border: none;
+		background: transparent;
+		border-radius: 0;
+		outline: none;
+		user-select: text;
+	}
+
+	.rowPressed {
+		background-color: rgba(72, 128, 255, 0.15);
+	}
+
+	.emptyRow {
+		border-bottom: none;
+	}
+
+	.emptyCell {
+		text-align: center;
+		font-size: 14px;
+		font-weight: 500;
+		color: var(--mws-gray-600);
+		padding: 24px 16px;
+	}
+
+	.emptyContent {
+		display: inline-flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 12px;
+		width: 100%;
+	}
+
+	.emptyIcon {
+		width: 36px;
+		height: 36px;
+		object-fit: contain;
+	}
+
+	.emptyText {
+		font-size: 14px;
+		font-weight: 500;
+		color: var(--mws-gray-600);
+	}
+
+	.fillerRow {
+		border-bottom: none;
+		background-color: transparent;
+	}
+
+	.fillerCell {
+		padding: 0;
+		border-right: none;
+	}
+}
