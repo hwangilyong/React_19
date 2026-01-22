@@ -24,13 +24,13 @@
     &:hover:not(:disabled) {
       border-color: var(--mws-blue-600);
       background-color: var(--mws-alpha-blue-15);
-      box-shadow: 0 4px 4px rgba(0, 118, 255, 0.2);
+      box-shadow: 0 4px 4px var(--mws-alpha-primary-20);
     }
 
     &:focus-visible {
       outline: none;
       border-color: var(--mws-blue-600);
-      box-shadow: 0 0 0 2px rgba(72, 128, 255, 0.2);
+      box-shadow: 0 0 0 2px var(--mws-alpha-blue-20);
     }
   }
 
@@ -96,7 +96,7 @@
     border-radius: 2px;
     border: 1px solid var(--mws-blue-600);
     background-color: var(--mws-white);
-    box-shadow: 0 4px 6px rgba(0, 118, 255, 0.2);
+    box-shadow: 0 4px 6px var(--mws-alpha-primary-20);
     max-height: 280px;
     overflow-y: auto;
     overflow-x: hidden;

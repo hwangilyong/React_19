@@ -43,7 +43,7 @@
       color: var(--mws-blue-600);
       background-color: var(--mws-alpha-blue-15);
       border-color: var(--mws-blue-600);
-      box-shadow: 0 4px 4px rgba(0, 118, 255, 0.2);
+      box-shadow: 0 4px 4px var(--mws-alpha-primary-20);
       --ico-filter: brightness(0) saturate(100%) invert(36%) sepia(86%)
         saturate(2481%) hue-rotate(203deg) brightness(102%) contrast(104%);
     }
@@ -52,7 +52,7 @@
       color: var(--mws-ink-900);
       background-color: var(--mws-alpha-blue-50);
       border-color: var(--mws-blue-500);
-      box-shadow: 0 4px 4px rgba(0, 118, 255, 0.2);
+      box-shadow: 0 4px 4px var(--mws-alpha-primary-20);
       --ico-filter: none;
     }
   }
@@ -61,7 +61,7 @@
     color: var(--mws-blue-600);
     background-color: var(--mws-alpha-blue-15);
     border-color: var(--mws-blue-600);
-    box-shadow: 0 4px 4px rgba(0, 118, 255, 0.2);
+    box-shadow: 0 4px 4px var(--mws-alpha-primary-20);
     --ico-filter: brightness(0) saturate(100%) invert(36%) sepia(86%)
       saturate(2481%) hue-rotate(203deg) brightness(102%) contrast(104%);
   }
@@ -70,7 +70,7 @@
     color: var(--mws-ink-900);
     background-color: var(--mws-alpha-blue-50);
     border-color: var(--mws-blue-500);
-    box-shadow: 0 4px 4px rgba(0, 118, 255, 0.2);
+    box-shadow: 0 4px 4px var(--mws-alpha-primary-20);
     --ico-filter: none;
   }
 

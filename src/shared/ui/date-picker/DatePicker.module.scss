@@ -46,7 +46,7 @@
   }
 
   .dayEvent {
-    color: #15b055;
+    color: var(--mws-green-500);
   }
 
   .dayContent {
@@ -64,7 +64,7 @@
     left: 50%;
     width: 4px;
     height: 4px;
-    background-color: #15b055;
+    background-color: var(--mws-green-500);
     border-radius: 999px;
     transform: translateX(-50%);
   }
@@ -74,7 +74,7 @@
     border-radius: 2px;
     background-color: var(--mws-white);
     padding: 8px 12px 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 20px var(--mws-alpha-black-08);
     font-family: inherit;
     width: 100%;
     max-width: 286px;

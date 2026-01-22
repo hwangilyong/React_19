@@ -138,7 +138,7 @@ const TemplateCodePopup = ({onClose, zIndex, isTop}: TemplateCodePopupProps) => 
 				columns={columns}
 				data={data}
 				createRow={createRow}
-				bodyHeight={505}
+				wrapperHeight={505}
 				history
 			/>
 		</ModalTemplate>

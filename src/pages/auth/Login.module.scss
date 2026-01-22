@@ -1,7 +1,7 @@
 @layer components {
 	.page {
 		min-height: 100vh;
-		background: #2b2c2e;
+		background: var(--mws-ink-950);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -53,12 +53,12 @@
 		width: 148px;
 		height: 148px;
 		border-radius: 32px;
-		background: #ffffff;
-		border: 1px solid rgba(25, 25, 23, 0.2);
+		background: var(--mws-white);
+		border: 1px solid var(--mws-alpha-ink-20);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+		box-shadow: 0 1px 3px var(--mws-alpha-black-04);
 	}
 
 	.badgeLogo {
@@ -72,7 +72,7 @@
 		flex-direction: column;
 		gap: 10px;
 		text-align: center;
-		color: #ffffff;
+		color: var(--mws-white);
 	}
 
 	.leftTitle {
@@ -92,7 +92,7 @@
 		width: 945px;
 		height: 1060px;
 		border-radius: 30px;
-		background: #ffffff;
+		background: var(--mws-white);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -110,7 +110,7 @@
 		font-size: 34px;
 		font-weight: 600;
 		letter-spacing: -0.34px;
-		color: #242628;
+		color: var(--mws-ink-900);
 		margin-bottom: 10px;
 	}
 
@@ -124,15 +124,15 @@
 	.divider {
 		height: 1px;
 		width: 360px;
-		background: rgba(25, 25, 23, 0.2);
+		background: var(--mws-alpha-ink-20);
 	}
 
 	.button {
 		width: 360px;
 		height: 52px;
 		border-radius: 8px;
-		background: #242628;
-		color: #ffffff;
+		background: var(--mws-ink-900);
+		color: var(--mws-white);
 		font-size: 16px;
 		font-weight: 500;
 		letter-spacing: -0.16px;
@@ -144,7 +144,7 @@
 		position: absolute;
 		bottom: 117px;
 		font-size: 14px;
-		color: #65686e;
+		color: var(--mws-gray-700);
 	}
 
 	@media (max-width: 1440px) {

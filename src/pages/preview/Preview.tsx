@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { icons } from '@/shared/assets/images';
 import BtnBasic from '@/shared/ui/buttons/Basic/BtnBasic.tsx';
 import BtnToggle from '@/shared/ui/buttons/Toggle/BtnToggle';
@@ -12,6 +12,7 @@ import CheckBox from '@/shared/ui/checkbox/CheckBox';
 import EditableTable from '@/shared/ui/tables/EditableTable';
 import TemplateCodePopup from '@/shared/ui/popups/TemplateCodePopup/TemplateCodePopup';
 import {useModal} from '@/app/contexts/ModalContext';
+import clsx from "clsx";
 
 const btnIcons = icons.btn;
 const inputIcons = icons.input;
@@ -130,11 +131,34 @@ const tableData: TableRow[] = [
 		area: '100 ㎢',
 		length: '250 km',
 	},
+	{
+		name: '부산 에코델타시티지하매설관 공사',
+		location: '전라북도 전주시 화전동 54-1번지 외 4개소 일원',
+		operator: '한국수자원공사 금강사업권',
+		area: '100 ㎢',
+		length: '250 km',
+	},
+	{
+		name: '부산 에코델타시티지하매설관 공사',
+		location: '전라북도 전주시 화전동 54-1번지 외 4개소 일원',
+		operator: '한국수자원공사 금강사업권',
+		area: '100 ㎢',
+		length: '250 km',
+	},
+	{
+		name: '부산 에코델타시티지하매설관 공사',
+		location: '전라북도 전주시 화전동 54-1번지 외 4개소 일원',
+		operator: '한국수자원공사 금강사업권',
+		area: '100 ㎢',
+		length: '250 km',
+	},
 ];
 
 const editableTableData: EditableTableRow[] = [
 	{item: '관로 점검', category: '점검', qty: '3', owner: '김영수'},
 	{item: '현장 사진 업로드', category: '기록', qty: '12', owner: '박지민'},
+	{item: '측량 데이터 정리', category: '정리', qty: '5', owner: '이수진'},
+	{item: '측량 데이터 정리', category: '정리', qty: '5', owner: '이수진'},
 	{item: '측량 데이터 정리', category: '정리', qty: '5', owner: '이수진'},
 ];
 
@@ -194,6 +218,15 @@ const editableTableColumns: ColumnDef<EditableTableRow>[] = [
 		size: 160,
 	},
 ];
+
+const THEME_STORAGE_KEY = 'theme';
+type ThemeMode = 'light' | 'dark';
+
+const applyTheme = (nextTheme: ThemeMode) => {
+	const root = document.documentElement;
+	root.setAttribute('data-theme', nextTheme);
+	root.classList.toggle('dark', nextTheme === 'dark');
+};
 
 const ColorGuide = () => (
 	<section className="flex flex-col gap-[28px]">
@@ -612,6 +645,7 @@ const ComponentGuide = ({checkboxDisabled, onCheckboxDisabledChange}: ComponentG
 const Preview = () => {
 	const [selectedTableRowId, setSelectedTableRowId] = useState<string | null>(null);
 	const [checkboxDisabled, setCheckboxDisabled] = useState(false);
+	const [theme, setTheme] = useState<ThemeMode>('light');
 	const {openModal} = useModal();
 	const handleOpenTemplatePopup = () => {
 		openModal(({close, zIndex, isTop}) => (
@@ -619,9 +653,36 @@ const Preview = () => {
 		));
 	};
 
+	useEffect(() => {
+		const saved = localStorage.getItem(THEME_STORAGE_KEY) as ThemeMode | null;
+		const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
+		const initialTheme = saved ?? (prefersDark ? 'dark' : 'light');
+		setTheme(initialTheme);
+		applyTheme(initialTheme);
+	}, []);
+
+	useEffect(() => {
+		applyTheme(theme);
+		localStorage.setItem(THEME_STORAGE_KEY, theme);
+	}, [theme]);
+
 	return (
 		<div className="min-h-screen bg-mws-white text-mws-ink-500">
 			<div className="mx-auto flex w-full max-w-[1620px] flex-col gap-[96px] px-[48px] py-[80px]">
+				<div className="flex items-center justify-end gap-[8px]">
+					<BtnBasic
+						theme={theme === 'light' ? 'blue' : 'white'}
+						onClick={() => setTheme('light')}
+					>
+						화이트
+					</BtnBasic>
+					<BtnBasic
+						theme={theme === 'dark' ? 'blue' : 'white'}
+						onClick={() => setTheme('dark')}
+					>
+						다크
+					</BtnBasic>
+				</div>
 				<ColorGuide />
 				<FontGuide />
 				<ButtonGuide />
@@ -640,25 +701,26 @@ const Preview = () => {
 							템플릿 코드 세팅
 						</BtnBasic>
 					</div>
+					<div className={'h-[700px]'}>
+						<TableTemplate
+							columns={tableColumns}
+							data={tableData.slice(0, 10)}
+							// data={tableData}
+							rowClassName={(row) => selectedTableRowId === row.id ? tableStyles.rowPressed : undefined}
+							onRowClick={(row) => setSelectedTableRowId(row.id)}
+						/>
+					</div>
 					<TableTemplate
 						columns={tableColumns}
-						data={tableData}
-						tbodyHeight={620}
-						rowClassName={(row) =>
-							selectedTableRowId === row.id ? tableStyles.rowPressed : undefined
-						}
-						onRowClick={(row) => setSelectedTableRowId(row.id)}
-					>
-					</TableTemplate>
-					<TableTemplate
-						columns={tableColumns}
+						headerRowHeight={48}
 						data={[]}
-						tbodyHeight={320}
-						emptyText="등록된 데이터가 없습니다."
+						emptyText="등록된 데이터가 없습니다." wrapperHeight={420}
 					/>
 					<EditableTable
 						columns={editableTableColumns}
 						data={editableTableData}
+						wrapperHeight={320}
+
 						history
 					/>
 				</section>

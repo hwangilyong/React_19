@@ -1,7 +1,7 @@
 import * as React from "react";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
-import clsx from "clsx";
+import clsx, { type ClassValue } from "clsx";
 import styles from "@/shared/ui/templates/TableTemplate/TableTemplate.module.scss";
 import {
 	flexRender,
@@ -24,11 +24,13 @@ type EditableTableProps<TData extends RowData, TValue> = UseDataTableProps<
 	TData,
 	TValue
 > & {
-	className?: string;
-	tableClassName?: string;
-	headerClassName?: string;
-	bodyClassName?: string;
-	bodyHeight?: number | string;
+	className?: ClassValue;
+	tableClassName?: ClassValue;
+	headerClassName?: ClassValue;
+	bodyClassName?: ClassValue;
+	wrapperHeight: number | string;
+	rowHeight?: number;
+	headerRowHeight?: number;
 	autoAddRowsOnPaste?: boolean;
 };
 
@@ -39,7 +41,9 @@ function EditableTable<TData extends RowData, TValue>({
 	tableClassName,
 	headerClassName,
 	bodyClassName,
-	bodyHeight,
+	wrapperHeight,
+	rowHeight,
+	headerRowHeight,
 	autoAddRowsOnPaste,
 	history,
 	maxHistorySize,
@@ -66,7 +70,7 @@ function EditableTable<TData extends RowData, TValue>({
 		null
 	);
 	const editingInputRef = React.useRef<HTMLInputElement | null>(null);
-	const baselineRef = React.useRef<TData[]>(data);
+	const baselineRef = React.useRef<TData[]>(data.map((row) => ({ ...row })));
 	const skipBlurCommitRef = React.useRef(false);
 	const {
 		selectedCell,
@@ -236,11 +240,33 @@ function EditableTable<TData extends RowData, TValue>({
 		return typeof value === "number" ? `${value}px` : value;
 	};
 
-	const bodyHeightValue = resolveSizeValue(bodyHeight);
+	const bodyRowHeightValue = rowHeight ?? 48;
+	const headerRowHeightValue = headerRowHeight ?? bodyRowHeightValue;
+	const wrapperHeightValue = resolveSizeValue(wrapperHeight);
+	const headerRowsCount = table.getHeaderGroups().length || 1;
+	const headerHeightPx = headerRowsCount * headerRowHeightValue;
+	const [measuredBodyHeight, setMeasuredBodyHeight] = React.useState<number | null>(null);
+	React.useLayoutEffect(() => {
+		const node = scrollableNodeRef.current;
+		if (!node) return;
+		const update = () => setMeasuredBodyHeight(node.clientHeight);
+		update();
+		if (typeof ResizeObserver === "undefined") return;
+		const observer = new ResizeObserver(() => update());
+		observer.observe(node);
+		return () => observer.disconnect();
+	}, [wrapperHeightValue, headerHeightPx]);
+	const bodyHeightValue = (() => {
+		if (!wrapperHeightValue) return undefined;
+		if (typeof wrapperHeight === "number") {
+			return `${Math.max(0, wrapperHeight - headerHeightPx)}px`;
+		}
+		return `calc(${wrapperHeightValue} - ${headerHeightPx}px)`;
+	})();
 	const rowVirtualizer = useVirtualizer({
 		count: rows.length,
 		getScrollElement: () => scrollableNodeRef.current,
-		estimateSize: () => 48,
+		estimateSize: () => bodyRowHeightValue,
 		overscan: 6,
 	});
 	const virtualItems = rowVirtualizer.getVirtualItems();
@@ -249,6 +275,11 @@ function EditableTable<TData extends RowData, TValue>({
 	const paddingBottom = virtualItems.length
 		? totalSize - virtualItems[virtualItems.length - 1].end
 		: 0;
+	const bodyHeightPx =
+		typeof wrapperHeight === "number"
+			? Math.max(0, wrapperHeight - headerHeightPx)
+			: measuredBodyHeight ?? 0;
+	const remainingSpace = Math.max(0, bodyHeightPx - totalSize);
 
 	React.useEffect(() => {
 		if (!editingCell) return;
@@ -259,7 +290,7 @@ function EditableTable<TData extends RowData, TValue>({
 	}, [editingCell]);
 
 	React.useEffect(() => {
-		baselineRef.current = data;
+		baselineRef.current = data.map((row) => ({ ...row }));
 	}, [data]);
 
 	const handleDeleteKey = React.useCallback(
@@ -304,13 +335,26 @@ function EditableTable<TData extends RowData, TValue>({
 			const colMin = Math.min(startColIndex, endColIndex);
 			const colMax = Math.max(startColIndex, endColIndex);
 
+			const updates: Array<{
+				rowIndex: number;
+				columnId: string;
+				value: unknown;
+			}> = [];
 			for (let r = rowMin; r <= rowMax; r += 1) {
 				for (let c = colMin; c <= colMax; c += 1) {
 					const column = columns[c];
 					if (!column || column.columnDef?.meta?.editable === false) continue;
-					handleCommitEdit(r, column.id, "");
+					updates.push({ rowIndex: r, columnId: column.id, value: "" });
 				}
 			}
+			const batchUpdate = table.options.meta?.updateCellDataBatch;
+			if (typeof batchUpdate === "function") {
+				batchUpdate(updates);
+				return true;
+			}
+			updates.forEach((update) => {
+				handleCommitEdit(update.rowIndex, update.columnId, "");
+			});
 			return true;
 		},
 		[handleCommitEdit, selection, selectedCell, table]
@@ -342,6 +386,13 @@ function EditableTable<TData extends RowData, TValue>({
 	return (
 		<div
 			className={clsx(styles.tableWrapper, className)}
+			style={
+				{
+					"--table-row-height": `${bodyRowHeightValue}px`,
+					"--table-header-row-height": `${headerRowHeightValue}px`,
+					height: wrapperHeightValue,
+				} as React.CSSProperties
+			}
 			onCopy={handleCopy}
 			onPaste={handlePaste}
 			onKeyDown={handleHistoryKeyDown}
@@ -480,8 +531,19 @@ function EditableTable<TData extends RowData, TValue>({
 						})}
 						{paddingBottom > 0 && (
 							<tr
-								className={styles.fillerRow}
+								className={clsx(styles.fillerRow, styles.fillerRowBorder)}
 								style={{ height: `${paddingBottom}px` }}
+							>
+								<td
+									className={styles.fillerCell}
+									colSpan={visibleColumns.length}
+								/>
+							</tr>
+						)}
+						{remainingSpace > 0 && (
+							<tr
+								className={clsx(styles.fillerRow, styles.fillerRowBorder)}
+								style={{ height: `${remainingSpace}px` }}
 							>
 								<td
 									className={styles.fillerCell}

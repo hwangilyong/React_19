@@ -22,6 +22,7 @@ declare const classNames: {
   readonly emptyIcon: "emptyIcon";
   readonly emptyText: "emptyText";
   readonly fillerRow: "fillerRow";
+  readonly fillerRowBorder: "fillerRowBorder";
   readonly fillerCell: "fillerCell";
 };
 export = classNames;

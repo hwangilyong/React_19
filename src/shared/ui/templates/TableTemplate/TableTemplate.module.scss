@@ -7,6 +7,8 @@
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
+
+		* {box-sizing: border-box;}
 	}
 
 	.table {
@@ -32,11 +34,11 @@
 	}
 
 	.thead {
-		background-color: #fafbff;
+		background-color: var(--mws-gray-25);
 	}
 
 	.headerRow {
-		height: 48px;
+		height: var(--table-header-row-height, 48px);
 	}
 
 	.headerCell {
@@ -58,12 +60,12 @@
 	}
 
 	.row {
-		height: 48px;
+		height: var(--table-row-height, 48px);
 		border-bottom: 1px solid var(--mws-gray-350);
 		transition: background-color 0.2s ease;
 
 		&:hover {
-			background-color: rgba(72, 128, 255, 0.062);
+			background-color: var(--mws-alpha-blue-06);
 		}
 
 		&:last-child {
@@ -99,15 +101,15 @@
 	}
 
 	.cellSelected {
-		background-color: rgba(72, 128, 255, 0.18);
+		background-color: var(--mws-alpha-blue-18);
 	}
 
 	.cellInRange {
-		background-color: rgba(72, 128, 255, 0.08);
+		background-color: var(--mws-alpha-blue-08);
 	}
 
 	.cellChanged {
-		background-color: rgba(255, 221, 128, 0.45);
+		background-color: var(--mws-alpha-amber-45);
 	}
 
 	.cellInput {
@@ -123,7 +125,7 @@
 	}
 
 	.rowPressed {
-		background-color: rgba(72, 128, 255, 0.15);
+		background-color: var(--mws-alpha-blue-15);
 	}
 
 	.emptyRow {
@@ -162,6 +164,10 @@
 	.fillerRow {
 		border-bottom: none;
 		background-color: transparent;
+	}
+
+	.fillerRowBorder {
+		border-top: 1px solid var(--mws-gray-350);
 	}
 
 	.fillerCell {

@@ -89,11 +89,35 @@ export function useDataTable<TData extends Record<string, any>, TValue>({
 		[handleSetData]
 	);
 
+	const updateCellDataBatch = React.useCallback(
+		(
+			updates: Array<{ rowIndex: number; columnId: string; value: unknown }>
+		) => {
+			if (updates.length === 0) return;
+			handleSetData(old => {
+				const next = [...old];
+				const clonedRows = new Set<number>();
+				updates.forEach(({ rowIndex, columnId, value }) => {
+					if (!next[rowIndex]) return;
+					const currentValue = (next[rowIndex] as Record<string, unknown>)[columnId];
+					if (currentValue === value) return;
+					if (!clonedRows.has(rowIndex)) {
+						next[rowIndex] = { ...next[rowIndex] };
+						clonedRows.add(rowIndex);
+					}
+					(next[rowIndex] as Record<string, unknown>)[columnId] = value;
+				});
+				return next;
+			});
+		},
+		[handleSetData]
+	);
+
 	const table = useReactTable({
 		data: history && presentState ? presentState : data,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
-		meta: { updateCellData },
+		meta: { updateCellData, updateCellDataBatch },
 		...props
 	});
 
