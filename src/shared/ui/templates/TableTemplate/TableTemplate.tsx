@@ -69,7 +69,7 @@ interface TableTemplateProps<T> {
     tableClassName?: ClassValue;
     headerClassName?: ClassValue;
     bodyClassName?: ClassValue;
-    wrapperHeight: number | string;
+    wrapperHeight?: number | string;
     rowHeight?: number;
     headerRowHeight?: number;
     emptyIconSrc?: string;
@@ -140,11 +140,11 @@ const TableTemplate = <T extends object>({
     const bodyRowHeightValue = rowHeight ?? 48;
     const headerRowHeightValue = headerRowHeight ?? bodyRowHeightValue;
     const wrapperHeightValue = resolveSizeValue(wrapperHeight);
-    const tableStyle: CSSProperties = {
+    const tableStyle = {
         '--table-row-height': `${bodyRowHeightValue}px`,
         '--table-header-row-height': `${headerRowHeightValue}px`,
         height: wrapperHeightValue,
-    };
+    } as CSSProperties;
     const headerScrollRef = useRef<HTMLDivElement>(null);
     const headerGroups = table.getHeaderGroups();
     const headerRowsCount = headerGroups.length || 1;

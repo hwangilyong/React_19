@@ -704,8 +704,8 @@ const Preview = () => {
 					<div className={'h-[700px]'}>
 						<TableTemplate
 							columns={tableColumns}
-							data={tableData.slice(0, 10)}
-							// data={tableData}
+							// data={tableData.slice(0, 10)}
+							data={tableData}
 							rowClassName={(row) => selectedTableRowId === row.id ? tableStyles.rowPressed : undefined}
 							onRowClick={(row) => setSelectedTableRowId(row.id)}
 						/>
