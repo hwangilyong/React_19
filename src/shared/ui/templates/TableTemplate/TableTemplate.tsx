@@ -247,7 +247,7 @@ const TableTemplate = <T extends object>({
             <SimpleBar
                 className={styles.bodyScroll}
                 scrollableNodeProps={{ref: scrollableNodeRef, onScroll: handleBodyScroll}}
-                style={bodyScrollStyle}
+                style={{ height: `calc(100% - ${headerRowHeightValue + 1}px)` }}
             >
                 <table className={clsx(styles.table, styles.bodyTable, tableClassName)}>
                     {renderBody

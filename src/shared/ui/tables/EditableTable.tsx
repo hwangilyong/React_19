@@ -241,11 +241,12 @@ function EditableTable<TData extends RowData, TValue>({
 	};
 
 	const bodyRowHeightValue = rowHeight ?? 48;
-	const headerRowHeightValue = headerRowHeight ?? bodyRowHeightValue;
+	const headerRowHeightValue = headerRowHeight ?? bodyRowHeightValue - 1;
 	const wrapperHeightValue = resolveSizeValue(wrapperHeight);
 	const headerRowsCount = table.getHeaderGroups().length || 1;
 	const headerHeightPx = headerRowsCount * headerRowHeightValue;
 	const [measuredBodyHeight, setMeasuredBodyHeight] = React.useState<number | null>(null);
+
 	React.useLayoutEffect(() => {
 		const node = scrollableNodeRef.current;
 		if (!node) return;
@@ -256,6 +257,7 @@ function EditableTable<TData extends RowData, TValue>({
 		observer.observe(node);
 		return () => observer.disconnect();
 	}, [wrapperHeightValue, headerHeightPx]);
+
 	const bodyHeightValue = (() => {
 		if (!wrapperHeightValue) return undefined;
 		if (typeof wrapperHeight === "number") {
@@ -263,6 +265,7 @@ function EditableTable<TData extends RowData, TValue>({
 		}
 		return `calc(${wrapperHeightValue} - ${headerHeightPx}px)`;
 	})();
+
 	const rowVirtualizer = useVirtualizer({
 		count: rows.length,
 		getScrollElement: () => scrollableNodeRef.current,
@@ -408,7 +411,7 @@ function EditableTable<TData extends RowData, TValue>({
 					ref: scrollableNodeRef,
 					onScroll: handleBodyScroll,
 				}}
-				style={bodyHeightValue ? { height: bodyHeightValue } : undefined}
+				style={{ height: `calc(100% - ${headerRowHeightValue + 1}px)` }}
 			>
 				<table className={clsx(styles.table, styles.bodyTable, tableClassName)}>
 					<tbody className={clsx(styles.tbody, bodyClassName)}>
